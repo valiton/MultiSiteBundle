@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="valiton_multi_site.site_admin.class">Valiton\Bundle\MultiSiteBundle\Admin\SiteAdmin</parameter>
+        <parameter key="valiton_multi_site.site.class">Valiton\Bundle\MultiSiteBundle\Document\Site</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="valiton_multi_site.site_admin" class="%valiton_multi_site.site_admin.class%">
+            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.group_admin" label_catalogue="ValitonMultiSiteBundle" label="dashboard.label_site" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument/>
+            <argument>%valiton_multi_site.site.class%</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+
+            <call method="setRouteBuilder">
+                <argument type="service" id="sonata.admin.route.path_info_slashes" />
+            </call>
+
+            <call method="setTranslationDomain">
+                <argument>ValitonMultiSiteBundle</argument>
+            </call>
+
+            <call method="setRoot">
+                <argument>%valiton_multi_site.base_path%</argument>
+            </call>
+
+            <call method="setActiveTheme">
+                <argument type="service" id="liip_theme.active_theme" on-invalid="null" />
+            </call>
+        </service>
+
+    </services>
+
+</container>

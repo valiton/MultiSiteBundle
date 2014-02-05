@@ -1,0 +1,21 @@
+dashboard:
+    group_admin: Administration
+    label_site: Websites
+
+
+breadcrumb:
+    link_site_list: Websites
+
+list:
+    label_name: Name
+    label_canonical_domain: Domain
+    label_meta_title: Titel
+
+form:
+    label_name: Name
+    label_meta_title: Titel
+    label_meta_description: Beschreibung
+    label_meta_keywords: Keywords
+    label_canonical_domain: Hauptdomain
+    label_domains: Weitere Domains
+
