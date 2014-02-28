@@ -31,7 +31,7 @@ class SiteService implements SiteServiceInterface
         $qb = $this->documentManager->createQueryBuilder();
 
         $qb
-            ->from('Valiton\Bundle\MultiSiteBundle\Document\Site')
+            ->from()->document('Valiton\Bundle\MultiSiteBundle\Document\Site', 's')
             ->where($qb->expr()->eq('domains', $domain))
             ->orWhere($qb->expr()->eq('canonicalDomain', $domain))
         ;
