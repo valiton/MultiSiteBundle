@@ -11,7 +11,7 @@
         <nodename name="name" />
         <parent-document name="parent" />
 
-        <field name="domains" type="string" multivalue="true" />
+        <field name="domains" type="string" multivalue="true" nullable="true" />
         <field name="canonicalDomain" type="string" />
 
         <field name="theme" type="string" />
