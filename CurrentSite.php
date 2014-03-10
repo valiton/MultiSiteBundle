@@ -6,6 +6,7 @@
  */
 namespace Valiton\Bundle\MultiSiteBundle;
 
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider;
 use Valiton\Bundle\MultiSiteBundle\Document\Site;
 
 class CurrentSite
@@ -19,7 +20,7 @@ class CurrentSite
     /** @var  \Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider */
     protected $menuProvider;
 
-    /** @var  \Symfony\Cmf\Bundle\RoutingBundle\Document\RouteProvider */
+    /** @var  RouteProvider */
     protected $routeProvider;
 
     /**
@@ -39,7 +40,7 @@ class CurrentSite
     }
 
     /**
-     * @param \Symfony\Cmf\Bundle\RoutingBundle\Document\RouteProvider $routeProvider
+     * @param RouteProvider $routeProvider
      */
     public function setRouteProvider($routeProvider)
     {

@@ -12,18 +12,20 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 
 class SiteService implements SiteServiceInterface
 {
-    /** @var  DocumentManager */
+    /** @var DocumentManager */
     protected $documentManager;
 
-    /** @var  string */
+    /** @var string */
     protected $basePath;
 
-    public function __construct($basePath, $registry = null, $objectManagerName = null)
+    /** @var string */
+    protected $siteClass;
+
+    public function __construct($basePath, $siteClass, ManagerRegistry $registry = null, $objectManagerName = null)
     {
         $this->basePath = $basePath;
-        if ($registry && $registry instanceof ManagerRegistry) {
-            $this->documentManager = $registry->getManager($objectManagerName);
-        }
+        $this->siteClass = $siteClass;
+        $this->documentManager = $registry->getManager($objectManagerName);
     }
 
     public function findSite($domain)
@@ -31,7 +33,7 @@ class SiteService implements SiteServiceInterface
         $qb = $this->documentManager->createQueryBuilder();
 
         $qb
-            ->fromDocument('Valiton\Bundle\MultiSiteBundle\Document\Site', 's')
+            ->fromDocument($this->siteClass, 's')
             ->where()->eq()->field('s.domains')->literal($domain)->end()->end()
             ->orWhere()->eq()->field('s.canonicalDomain')->literal($domain)->end()->end()
         ;

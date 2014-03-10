@@ -57,4 +57,9 @@ class SiteHelper
         }
         return null;
     }
+
+    public function getCurrentSite()
+    {
+        return $this->currentSite;
+    }
 }

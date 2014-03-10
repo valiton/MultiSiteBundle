@@ -26,6 +26,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('manager_registry')->defaultValue('doctrine_phpcr')->end()
                 ->scalarNode('manager_name')->defaultValue('default')->end()
                 ->scalarNode('base_path')->defaultValue('/cms')->end()
+                ->scalarNode('site_class')->defaultValue('Valiton\Bundle\MultiSiteBundle\Document\Site')->end()
+                ->scalarNode('current_site_service')->defaultNull()->end()
                 ->scalarNode('default_site')->defaultValue('main')->end()
                 ->enumNode('use_sonata_admin')
                     ->values(array(true, false, 'auto'))
