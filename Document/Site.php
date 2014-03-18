@@ -253,11 +253,19 @@ class Site implements TranslatableInterface
     public function getRoutesRoot()
     {
         if (null === $this->routesRoot) {
-            $this->routesRoot = new Generic();
+            $this->routesRoot = new MultiSiteRoute();
             $this->routesRoot->setParent($this);
-            $this->routesRoot->setNodename('routesRoot');
+            $this->routesRoot->setName('routesRoot');
         }
         return $this->routesRoot;
+    }
+
+    /**
+     * @param $routesRoot
+     */
+    public function setRoutesRoot($routesRoot)
+    {
+        $this->routesRoot = $routesRoot;
     }
 
 }
