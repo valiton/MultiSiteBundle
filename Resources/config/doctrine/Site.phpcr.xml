@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
            https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd">
 
-    <mapped-superclass name="Valiton\Bundle\MultiSiteBundle\Document\Site" translator="attribute" referenceable="true">
+    <document name="Valiton\Bundle\MultiSiteBundle\Document\Site" translator="attribute" referenceable="true">
         <id name="id">
             <generator strategy="PARENT" />
         </id>
@@ -39,7 +39,6 @@
                 <cascade-all />
             </cascade>
         </child>
-
-    </mapped-superclass>
+    </document>
 
 </doctrine-mapping>
