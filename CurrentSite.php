@@ -50,7 +50,7 @@ class CurrentSite
     /**
      * @param mixed $site
      */
-    public function setSite($site)
+    public function setSite(Site $site)
     {
         $this->site = $site;
         if (null !== $this->activeTheme && in_array($site->getTheme(), $this->activeTheme->getThemes())) {
