@@ -65,4 +65,15 @@ class SiteAdmin extends Admin
         $this->activeTheme = $activeTheme;
     }
 
+    public function getNewInstance()
+    {
+        $object = parent::getNewInstance();
+        if (null === $this->activeTheme) {
+            $object->setTheme('default');
+        }
+        $object->setParent($this->getModelManager()->find(null, $this->root));
+        return $object;
+    }
+
+
 }
