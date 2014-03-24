@@ -33,6 +33,10 @@ class Configuration implements ConfigurationInterface
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')
                 ->end()
+                ->enumNode('use_elfinder')
+                    ->values(array(true, false, 'auto'))
+                    ->defaultValue('auto')
+                ->end()
             ->end();
 
         return $treeBuilder;

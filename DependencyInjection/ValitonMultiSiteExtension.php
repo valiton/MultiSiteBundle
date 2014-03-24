@@ -40,6 +40,7 @@ class ValitonMultiSiteExtension extends Extension
         $siteService->replaceArgument(3, $config['manager_name']);
 
         $this->loadSonataAdmin($config, $loader, $container);
+        $this->loadElfinderDriver($config, $loader, $container);
     }
 
     protected function loadSonataAdmin($config, Loader\XmlFileLoader $loader, ContainerBuilder $container)
@@ -50,5 +51,15 @@ class ValitonMultiSiteExtension extends Extension
         }
 
         $loader->load('admin.xml');
+    }
+
+    protected function loadElfinderDriver($config, Loader\XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_elfinder'] && !isset($bundles['FMElfinderBundle'])) {
+            return;
+        }
+
+        $loader->load('elfinder.xml');
     }
 }

@@ -53,8 +53,11 @@ class Site implements TranslatableInterface
     /** @var  Generic */
     protected $contentRoot;
 
-    /** @var  Generic */
+    /** @var  MultiSiteRoute */
     protected $routesRoot;
+
+    /** @var  Generic */
+    protected $mediaRoot;
 
     /**
      * @param array $domains
@@ -267,5 +270,28 @@ class Site implements TranslatableInterface
     {
         $this->routesRoot = $routesRoot;
     }
+
+    /**
+     * @param \Doctrine\ODM\PHPCR\Document\Generic $mediaRoot
+     */
+    public function setMediaRoot($mediaRoot)
+    {
+        $this->mediaRoot = $mediaRoot;
+    }
+
+    /**
+     * @return \Doctrine\ODM\PHPCR\Document\Generic
+     */
+    public function getMediaRoot()
+    {
+        if (null === $this->mediaRoot) {
+            $this->mediaRoot = new Generic();
+            $this->mediaRoot->setParent($this);
+            $this->mediaRoot->setNodename('mediaRoot');
+        }
+        return $this->mediaRoot;
+    }
+
+
 
 }

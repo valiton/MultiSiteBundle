@@ -39,6 +39,13 @@
                 <cascade-all />
             </cascade>
         </child>
+
+        <child name="mediaRoot" node-name="mediaRoot">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </child>
+
     </document>
 
 </doctrine-mapping>
