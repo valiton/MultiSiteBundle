@@ -75,5 +75,11 @@ class SiteAdmin extends Admin
         return $object;
     }
 
-
+    public function toString($object)
+    {
+        if (null !== $object && null !== $object->getName()) {
+            return $object->getName();
+        }
+        return $this->trans('new_site');
+    }
 }

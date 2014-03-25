@@ -17,5 +17,6 @@ form:
     label_meta_description: Beschreibung
     label_meta_keywords: Keywords
     label_canonical_domain: Hauptdomain
-    label_domains: Weitere Domains
+    label_domains: 'Weitere Domains'
 
+new_site: 'Neue Site'
