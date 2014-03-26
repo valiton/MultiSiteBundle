@@ -6,8 +6,10 @@
  */
 namespace Valiton\Bundle\MultiSiteBundle\Document;
 
+use Doctrine\ODM\PHPCR\Document\File;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Site
@@ -29,34 +31,40 @@ class Site implements TranslatableInterface
     /** @var array */
     protected $domains;
 
-    /** @var  string */
+    /** @var string */
     protected $canonicalDomain;
 
     /** @var string */
     protected $theme;
 
-    /** @var  string */
+    /** @var string */
     protected $locale;
 
-    /** @var  string */
+    /** @var string */
     protected $metaTitle;
 
-    /** @var  string */
+    /** @var string */
     protected $metaDescription;
 
-    /** @var  string */
+    /** @var string */
     protected $metaKeywords;
 
-    /** @var  Generic */
+    /** @var File */
+    protected $favicon;
+
+    /** @var UploadedFile */
+    protected $faviconFile;
+
+    /** @var Generic */
     protected $menuRoot;
 
-    /** @var  Generic */
+    /** @var Generic */
     protected $contentRoot;
 
-    /** @var  MultiSiteRoute */
+    /** @var MultiSiteRoute */
     protected $routesRoot;
 
-    /** @var  Generic */
+    /** @var Generic */
     protected $mediaRoot;
 
     /**
@@ -217,6 +225,38 @@ class Site implements TranslatableInterface
     public function getCanonicalDomain()
     {
         return $this->canonicalDomain;
+    }
+
+    /**
+     * @param \Doctrine\ODM\PHPCR\Document\File $favicon
+     */
+    public function setFavicon($favicon)
+    {
+        $this->favicon = $favicon;
+    }
+
+    /**
+     * @return \Doctrine\ODM\PHPCR\Document\File
+     */
+    public function getFavicon()
+    {
+        return $this->favicon;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $faviconFile
+     */
+    public function setFaviconFile($faviconFile)
+    {
+        $this->faviconFile = $faviconFile;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+     */
+    public function getFaviconFile()
+    {
+        return $this->faviconFile;
     }
 
     public function __toString()

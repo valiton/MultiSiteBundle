@@ -22,6 +22,12 @@
         <field name="metaDescription" type="string" translated="true" />
         <field name="metaKeywords" type="string" translated="true" nullable="true" />
 
+        <reference-one name="favicon" target-document="Doctrine\ODM\PHPCR\Document\File">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </reference-one>
+
         <child name="menuRoot" node-name="menuRoot">
             <cascade>
                 <cascade-all />

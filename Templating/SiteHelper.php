@@ -58,6 +58,15 @@ class SiteHelper
         return null;
     }
 
+    public function getFavicon()
+    {
+        if (null !== $site = $this->currentSite->getSite()) {
+            return $site->getFavicon();
+        }
+        return null;
+    }
+
+
     public function getCurrentSite()
     {
         return $this->currentSite;

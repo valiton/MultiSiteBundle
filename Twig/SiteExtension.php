@@ -23,6 +23,18 @@ class SiteExtension extends \Twig_Extension
         return array('site' => $this->siteHelper);
     }
 
+    public function getFilters()
+    {
+        return array(
+            'base64_icon' => new \Twig_SimpleFilter('base64_icon', array($this, 'base64Icon'))
+        );
+    }
+
+    public function base64Icon($icon)
+    {
+        return 'data:image/x-icon;base64,'.base64_encode($icon->getFileContent());
+    }
+
     /**
      * Returns the name of the extension.
      *
