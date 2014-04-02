@@ -22,6 +22,12 @@
         <field name="metaDescription" type="string" translated="true" />
         <field name="metaKeywords" type="string" translated="true" nullable="true" />
 
+        <reference-one name="favicon" target-document="Doctrine\ODM\PHPCR\Document\File">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </reference-one>
+
         <child name="menuRoot" node-name="menuRoot">
             <cascade>
                 <cascade-all />
@@ -35,6 +41,12 @@
         </child>
 
         <child name="routesRoot" node-name="routesRoot">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </child>
+
+        <child name="mediaRoot" node-name="mediaRoot">
             <cascade>
                 <cascade-all />
             </cascade>

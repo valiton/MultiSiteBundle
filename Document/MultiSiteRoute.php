@@ -23,9 +23,12 @@ class MultiSiteRoute extends Route
     protected function getRoutesRoot()
     {
         $root = $this;
-        while ($root && $root instanceof \Symfony\Component\Routing\Route) {
+        while ($root && !$root instanceof Site) {
             $root = $root->getParent();
         }
-        return $root;
+        if ($root) {
+            return $root->getRoutesRoot();
+        }
+        return null;
     }
 }

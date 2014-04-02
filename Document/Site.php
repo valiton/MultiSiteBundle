@@ -6,8 +6,10 @@
  */
 namespace Valiton\Bundle\MultiSiteBundle\Document;
 
+use Doctrine\ODM\PHPCR\Document\File;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Site
@@ -29,32 +31,41 @@ class Site implements TranslatableInterface
     /** @var array */
     protected $domains;
 
-    /** @var  string */
+    /** @var string */
     protected $canonicalDomain;
 
     /** @var string */
     protected $theme;
 
-    /** @var  string */
+    /** @var string */
     protected $locale;
 
-    /** @var  string */
+    /** @var string */
     protected $metaTitle;
 
-    /** @var  string */
+    /** @var string */
     protected $metaDescription;
 
-    /** @var  string */
+    /** @var string */
     protected $metaKeywords;
 
-    /** @var  Generic */
+    /** @var File */
+    protected $favicon;
+
+    /** @var UploadedFile */
+    protected $faviconFile;
+
+    /** @var Generic */
     protected $menuRoot;
 
-    /** @var  Generic */
+    /** @var Generic */
     protected $contentRoot;
 
-    /** @var  Generic */
+    /** @var MultiSiteRoute */
     protected $routesRoot;
+
+    /** @var Generic */
+    protected $mediaRoot;
 
     /**
      * @param array $domains
@@ -216,6 +227,38 @@ class Site implements TranslatableInterface
         return $this->canonicalDomain;
     }
 
+    /**
+     * @param \Doctrine\ODM\PHPCR\Document\File $favicon
+     */
+    public function setFavicon($favicon)
+    {
+        $this->favicon = $favicon;
+    }
+
+    /**
+     * @return \Doctrine\ODM\PHPCR\Document\File
+     */
+    public function getFavicon()
+    {
+        return $this->favicon;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $faviconFile
+     */
+    public function setFaviconFile($faviconFile)
+    {
+        $this->faviconFile = $faviconFile;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+     */
+    public function getFaviconFile()
+    {
+        return $this->faviconFile;
+    }
+
     public function __toString()
     {
         return $this->getCanonicalDomain();
@@ -253,11 +296,42 @@ class Site implements TranslatableInterface
     public function getRoutesRoot()
     {
         if (null === $this->routesRoot) {
-            $this->routesRoot = new Generic();
+            $this->routesRoot = new MultiSiteRoute();
             $this->routesRoot->setParent($this);
-            $this->routesRoot->setNodename('routesRoot');
+            $this->routesRoot->setName('routesRoot');
         }
         return $this->routesRoot;
     }
+
+    /**
+     * @param $routesRoot
+     */
+    public function setRoutesRoot($routesRoot)
+    {
+        $this->routesRoot = $routesRoot;
+    }
+
+    /**
+     * @param \Doctrine\ODM\PHPCR\Document\Generic $mediaRoot
+     */
+    public function setMediaRoot($mediaRoot)
+    {
+        $this->mediaRoot = $mediaRoot;
+    }
+
+    /**
+     * @return \Doctrine\ODM\PHPCR\Document\Generic
+     */
+    public function getMediaRoot()
+    {
+        if (null === $this->mediaRoot) {
+            $this->mediaRoot = new Generic();
+            $this->mediaRoot->setParent($this);
+            $this->mediaRoot->setNodename('mediaRoot');
+        }
+        return $this->mediaRoot;
+    }
+
+
 
 }

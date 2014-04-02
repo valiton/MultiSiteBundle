@@ -6,9 +6,11 @@
  */
 namespace Valiton\Bundle\MultiSiteBundle\Admin;
 
+use Doctrine\ODM\PHPCR\Document\File;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
+use Valiton\Bundle\MultiSiteBundle\Document\Site;
 
 class SiteAdmin extends Admin
 {
@@ -30,6 +32,8 @@ class SiteAdmin extends Admin
             ->add('metaKeywords')
             ->add('canonicalDomain')
             ->add('domains', 'collection', array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
+            ->add('favicon')
+            ->add('faviconFile', 'file', array('required' => false))
         ;
     }
 
@@ -65,4 +69,50 @@ class SiteAdmin extends Admin
         $this->activeTheme = $activeTheme;
     }
 
+    public function getNewInstance()
+    {
+        $object = parent::getNewInstance();
+        if (null === $this->activeTheme) {
+            $object->setTheme('default');
+        }
+        $object->setParent($this->getModelManager()->find(null, $this->root));
+        return $object;
+    }
+
+    public function prePersist($object)
+    {
+        $this->upload($object);
+    }
+
+    public function preUpdate($object)
+    {
+        $this->upload($object);
+    }
+
+
+    public function toString($object)
+    {
+        if (null !== $object && null !== $object->getName()) {
+            return $object->getName();
+        }
+        return $this->trans('new_site');
+    }
+
+    public function upload(Site $site)
+    {
+        if (null !== $uploadFile = $site->getFaviconFile()) {
+            $file = $this->modelManager->find(null, $site->getMediaRoot()->getId() . '/' . $uploadFile->getClientOriginalName());
+            if (null == $file) {
+                $file = new File();
+                $file->setNodename($uploadFile->getClientOriginalName());
+                $file->setParent($site->getMediaRoot());
+                $file->setFileContentFromFilesystem($uploadFile->getRealPath());
+                $this->modelManager->create($file);
+                $site->setFavicon($file);
+            }
+            else {
+                $file->setFileContentFromFilesystem($uploadFile->getRealPath());
+            }
+        }
+    }
 }

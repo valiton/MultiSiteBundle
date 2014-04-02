@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="valiton_multi_site.base_path">/cms</parameter>
         <parameter key="valiton_multi_site.default_site">main</parameter>
-        <parameter key="valiton_multi_site.current_site.class">Valiton\Bundle\MultiSiteBundle\CurrentSite</parameter>
+        <parameter key="valiton_multi_site.default_current_site.class">Valiton\Bundle\MultiSiteBundle\CurrentSite</parameter>
         <parameter key="valiton_multi_site.site_service.class">Valiton\Bundle\MultiSiteBundle\Service\SiteService</parameter>
         <parameter key="valiton_multi_site.request_listener.class">Valiton\Bundle\MultiSiteBundle\EventListener\RequestListener</parameter>
         <parameter key="valiton_multi_site.site_helper.class">Valiton\Bundle\MultiSiteBundle\Templating\SiteHelper</parameter>
@@ -16,7 +16,7 @@
 
     <services>
 
-        <service id="valiton_multi_site.current_site" class="%valiton_multi_site.current_site.class%">
+        <service id="valiton_multi_site.default_current_site" class="%valiton_multi_site.default_current_site.class%">
             <call method="setActiveTheme" >
                 <argument type="service" id="liip_theme.active_theme" on-invalid="null" />
             </call>
@@ -26,10 +26,26 @@
             <call method="setRouteProvider" >
                 <argument type="service" id="cmf_routing.route_provider" on-invalid="null" />
             </call>
+            <call method="setMediaManager">
+                <argument type="service" id="cmf_media.persistence.phpcr.manager" on-invalid="null" />
+            </call>
+            <call method="setUploadFileHelper">
+                <argument type="service" id="cmf_media.persistence.phpcr.upload_file_helper" on-invalid="null" />
+            </call>
+            <call method="setUploadImageHelper">
+                <argument type="service" id="cmf_media.persistence.phpcr.upload_image_helper" on-invalid="null" />
+            </call>
+            <call method="setFileController">
+                <argument type="service" id="cmf_media.file_controller" on-invalid="null" />
+            </call>
+            <call method="setImageController">
+                <argument type="service" id="cmf_media.image_controller" on-invalid="null" />
+            </call>
         </service>
 
         <service id="valiton_multi_site.site_service" class="%valiton_multi_site.site_service.class%">
             <argument>%valiton_multi_site.base_path%</argument>
+            <argument>%valiton_multi_site.site.class%</argument>
             <argument/>
             <argument/>
         </service>

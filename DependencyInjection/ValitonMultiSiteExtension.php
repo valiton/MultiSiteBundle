@@ -28,12 +28,19 @@ class ValitonMultiSiteExtension extends Extension
 
         $container->setParameter('valiton_multi_site.base_path', $config['base_path']);
         $container->setParameter('valiton_multi_site.default_site', $config['default_site']);
+        $container->setParameter('valiton_multi_site.site.class', $config['site_class']);
+        $currentSiteService = 'valiton_multi_site.default_current_site';
+        if (null !== $config['current_site_service']) {
+            $currentSiteService = $config['current_site_service'];
+        }
+        $container->setAlias('valiton_multi_site.current_site', $currentSiteService);
 
         $siteService = $container->getDefinition('valiton_multi_site.site_service');
-        $siteService->replaceArgument(1, new Reference($config['manager_registry']));
-        $siteService->replaceArgument(2, $config['manager_name']);
+        $siteService->replaceArgument(2, new Reference($config['manager_registry']));
+        $siteService->replaceArgument(3, $config['manager_name']);
 
         $this->loadSonataAdmin($config, $loader, $container);
+        $this->loadElfinderDriver($config, $loader, $container);
     }
 
     protected function loadSonataAdmin($config, Loader\XmlFileLoader $loader, ContainerBuilder $container)
@@ -44,5 +51,15 @@ class ValitonMultiSiteExtension extends Extension
         }
 
         $loader->load('admin.xml');
+    }
+
+    protected function loadElfinderDriver($config, Loader\XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_elfinder'] && !isset($bundles['FMElfinderBundle'])) {
+            return;
+        }
+
+        $loader->load('elfinder.xml');
     }
 }
