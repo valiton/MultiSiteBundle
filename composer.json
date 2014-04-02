@@ -3,6 +3,7 @@
     "description": "Symfony2 bundle for CMF multi site setup",
     "type": "symfony-bundle",
     "minimum-stability": "dev",
+    "license": "MIT",
     "authors": [
         {
             "name": "Uwe Jäger",
