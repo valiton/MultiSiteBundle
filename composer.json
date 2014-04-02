@@ -1,5 +1,5 @@
 {
-    "name": "valiton/sf2-multisite",
+    "name": "valiton/multisite-bundle",
     "description": "Symfony2 bundle for CMF multi site setup",
     "type": "symfony-bundle",
     "minimum-stability": "dev",
