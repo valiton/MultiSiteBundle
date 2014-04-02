@@ -11,6 +11,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 
 class MultiSiteRoute extends Route
 {
+    protected $site = false;
 
     public function getStaticPrefix()
     {
@@ -22,13 +23,30 @@ class MultiSiteRoute extends Route
      */
     protected function getRoutesRoot()
     {
-        $root = $this;
-        while ($root && !$root instanceof Site) {
-            $root = $root->getParent();
-        }
-        if ($root) {
-            return $root->getRoutesRoot();
+        if ($site = $this->getSite()) {
+            return $site->getRoutesRoot();
         }
         return null;
     }
+
+    protected function getSite()
+    {
+        if (false === $this->site) {
+            $node = $this;
+            while ($node && !$node instanceof Site) {
+                $node = $node->getParent();
+            }
+            $this->site = $node;
+        }
+        return $this->site;
+    }
+
+    public function getHost()
+    {
+        if ($site = $this->getSite()) {
+            return $site->getCanonicalDomain();
+        }
+        return null;
+    }
+
 }
