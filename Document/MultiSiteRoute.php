@@ -19,7 +19,7 @@ class MultiSiteRoute extends Route
     }
 
     /**
-     * return the first parent that is not instance of a route
+     * Return the first parent that is not instance of a route
      */
     protected function getRoutesRoot()
     {
@@ -41,12 +41,14 @@ class MultiSiteRoute extends Route
         return $this->site;
     }
 
+    /**
+     * The host is already determined by the site, so ignore the setting in the route
+     *
+     * @return string
+     */
     public function getHost()
     {
-        if ($site = $this->getSite()) {
-            return $site->getCanonicalDomain();
-        }
-        return null;
+        return '';
     }
 
 }
