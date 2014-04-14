@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="valiton_multi_site.site_admin.class">Valiton\Bundle\MultiSiteBundle\Admin\SiteAdmin</parameter>
         <parameter key="valiton_multi_site.site.class">Valiton\Bundle\MultiSiteBundle\Document\Site</parameter>
+        <parameter key="valiton_multi_site.site_admin_extension.class">Valiton\Bundle\MultiSiteBundle\Admin\Extension\MultiSiteExtension</parameter>
     </parameters>
 
     <services>
@@ -31,6 +32,13 @@
 
             <call method="setActiveTheme">
                 <argument type="service" id="liip_theme.active_theme" on-invalid="null" />
+            </call>
+        </service>
+
+        <service id="valiton_multi_site.site_admin_extension" class="%valiton_multi_site.site_admin_extension.class%">
+            <tag name="sonata.admin.extension"/>
+            <call method="setSiteService">
+                <argument type="service" id="valiton_multi_site.site_service" />
             </call>
         </service>
 

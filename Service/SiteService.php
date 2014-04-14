@@ -8,6 +8,7 @@ namespace Valiton\Bundle\MultiSiteBundle\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
 class SiteService implements SiteServiceInterface
@@ -50,6 +51,32 @@ class SiteService implements SiteServiceInterface
     public function findSiteByName($name)
     {
         return $this->documentManager->find(null, $this->basePath.'/'.$name);
+    }
+
+    public function findSiteByChild($child)
+    {
+        $qb = $this->documentManager->createQueryBuilder();
+
+        $qb
+            ->from()
+                ->joinInner()
+                    ->left()->document(ClassUtils::getClass($child), 'child')->end()
+                    ->right()->document($this->siteClass, 'site')->end()
+                    ->condition()
+                        ->descendant('child', 'site')
+                    ->end()
+                ->end()
+            ->end()
+            ->where()->same($child->getId(), 'child')->end()
+        ;
+
+        /** @var ArrayCollection $result */
+        $result = $qb->getQuery()->execute();
+        if (null !== $result && count($result) > 0) {
+            return $result->current();
+        }
+
+        return null;
     }
 
 }
