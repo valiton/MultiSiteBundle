@@ -46,7 +46,7 @@ class ValitonMultiSiteExtension extends Extension
     protected function loadSonataAdmin($config, Loader\XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
+        if (!$config['use_sonata_admin'] || ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle']))) {
             return;
         }
 
@@ -56,7 +56,7 @@ class ValitonMultiSiteExtension extends Extension
     protected function loadElfinderDriver($config, Loader\XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['use_elfinder'] && !isset($bundles['FMElfinderBundle'])) {
+        if (!$config['use_elfinder'] || ('auto' === $config['use_elfinder'] && !isset($bundles['FMElfinderBundle']))) {
             return;
         }
 
