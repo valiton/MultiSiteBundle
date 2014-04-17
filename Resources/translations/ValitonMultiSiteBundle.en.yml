@@ -14,9 +14,17 @@ list:
 form:
     label_name: Name
     label_meta_title: Title
+    label_theme: Template
     label_meta_description: Description
     label_meta_keywords: Keywords
     label_canonical_domain: Domain
     label_domains: 'Other domains'
+    label_favicon: 'Favorite Icon'
+    label_favicon_file: 'Upload Favorite Icon'
+
+    group_general: 'Allgemein'
 
 new_site: 'New site'
+
+
+

@@ -32,7 +32,7 @@ class SiteAdmin extends Admin
             ->add('metaKeywords')
             ->add('canonicalDomain')
             ->add('domains', 'collection', array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
-            ->add('favicon')
+            ->add('favicon', null, array('required' => false))
             ->add('faviconFile', 'file', array('required' => false))
         ;
     }
