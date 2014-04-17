@@ -15,7 +15,7 @@
         <service id="valiton_multi_site.site_admin" class="%valiton_multi_site.site_admin.class%">
             <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.group_admin" label_catalogue="ValitonMultiSiteBundle" label="dashboard.label_site" label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>%valiton_multi_site.site.class%</argument>
+            <argument>%valiton_multi_site.site_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">

@@ -46,7 +46,7 @@
 
         <service id="valiton_multi_site.site_service" class="%valiton_multi_site.site_service.class%">
             <argument>%valiton_multi_site.base_path%</argument>
-            <argument>%valiton_multi_site.site.class%</argument>
+            <argument>%valiton_multi_site.site_class%</argument>
             <argument/>
             <argument/>
         </service>
