@@ -25,6 +25,9 @@ class SiteFieldDescription extends FieldDescription
 
     public function getValue($object)
     {
+        if (null === $object->getId()) {
+            return null;
+        }
         return $this->siteService->findSiteByChild($object)->getName();
     }
 

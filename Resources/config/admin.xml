@@ -5,12 +5,28 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="valiton_multi_site.route_admin.class">Valiton\Bundle\MultiSiteBundle\Admin\RouteAdmin</parameter>
         <parameter key="valiton_multi_site.site_admin.class">Valiton\Bundle\MultiSiteBundle\Admin\SiteAdmin</parameter>
         <parameter key="valiton_multi_site.site.class">Valiton\Bundle\MultiSiteBundle\Document\Site</parameter>
         <parameter key="valiton_multi_site.site_admin_extension.class">Valiton\Bundle\MultiSiteBundle\Admin\Extension\MultiSiteExtension</parameter>
     </parameters>
 
     <services>
+
+        <service id="valiton_multi_site.route_admin" class="%valiton_multi_site.route_admin.class%">
+            <tag name="sonata.admin" manager_type="doctrine_phpcr" label_catalogue="ValitonMultiSiteBundle" label="dashboard.label_route" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument/>
+            <argument>Valiton\Bundle\MultiSiteBundle\Document\MultiSiteRoute</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+
+            <call method="setRouteBuilder">
+                <argument type="service" id="sonata.admin.route.path_info_slashes" />
+            </call>
+
+            <call method="setTranslationDomain">
+                <argument>ValitonMultiSiteBundle</argument>
+            </call>
+        </service>
 
         <service id="valiton_multi_site.site_admin" class="%valiton_multi_site.site_admin.class%">
             <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.group_admin" label_catalogue="ValitonMultiSiteBundle" label="dashboard.label_site" label_translator_strategy="sonata.admin.label.strategy.underscore" />

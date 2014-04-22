@@ -22,7 +22,11 @@ class SiteNameType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['value'] = $this->siteService->findSiteByChild($form->getData())->getName();
+        if (null !== $form->getData()->getId()) {
+            $view->vars['value'] = $this->siteService->findSiteByChild($form->getData())->getName();
+        } else {
+            $view->vars['value'] = '';
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
