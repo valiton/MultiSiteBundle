@@ -10,6 +10,7 @@ namespace Valiton\Bundle\MultiSiteBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Valiton\Bundle\MultiSiteBundle\CurrentSite;
@@ -45,6 +46,10 @@ class RequestListener implements EventSubscriberInterface
 
         if (null === $site) {
             $site = $this->siteService->findSiteByName($this->defaultSiteName);
+        }
+
+        if (null === $site) {
+            throw new NotFoundHttpException();
         }
 
         if ($request->isMethodSafe() && null !== $site->getCanonicalDomain() && $request->getHost() != $site->getCanonicalDomain()) {
