@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('site_class')->defaultValue('Valiton\Bundle\MultiSiteBundle\Document\Site')->end()
                 ->scalarNode('current_site_service')->defaultNull()->end()
                 ->scalarNode('default_site')->defaultValue('main')->end()
+                ->scalarNode('allowed_sites_filter')->defaultNull()->end()
                 ->enumNode('use_sonata_admin')
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')

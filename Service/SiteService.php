@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\PHPCR\DocumentManager;
+use Valiton\Bundle\MultiSiteBundle\Security\AllowedSitesFilter;
 
 class SiteService implements SiteServiceInterface
 {
@@ -22,11 +23,15 @@ class SiteService implements SiteServiceInterface
     /** @var string */
     protected $siteClass;
 
-    public function __construct($basePath, $siteClass, ManagerRegistry $registry = null, $objectManagerName = null)
+    /** @var AllowedSitesFilter */
+    protected $allowedSitesFilter;
+
+    public function __construct($basePath, $siteClass, ManagerRegistry $registry = null, $objectManagerName = null, AllowedSitesFilter $allowedSitesFilter = null)
     {
         $this->basePath = $basePath;
         $this->siteClass = $siteClass;
         $this->documentManager = $registry->getManager($objectManagerName);
+        $this->allowedSitesFilter = $allowedSitesFilter;
     }
 
     public function findSite($domain)
@@ -77,6 +82,20 @@ class SiteService implements SiteServiceInterface
         }
 
         return null;
+    }
+
+    public function getSites()
+    {
+        $qb = $this->documentManager->createQueryBuilder();
+
+        $qb->fromDocument($this->siteClass, 's');
+        $sites = $qb->getQuery()->execute();
+
+        if (null !== $this->allowedSitesFilter) {
+            return $this->allowedSitesFilter->filterAllowedSites($sites);
+        }
+
+        return $sites;
     }
 
 }

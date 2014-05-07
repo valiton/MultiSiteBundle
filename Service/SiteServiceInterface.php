@@ -13,4 +13,6 @@ interface SiteServiceInterface
     public function findSiteByName($name);
 
     public function findSiteByChild($child);
+
+    public function getSites();
 }

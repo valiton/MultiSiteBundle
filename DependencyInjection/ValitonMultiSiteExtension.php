@@ -29,6 +29,7 @@ class ValitonMultiSiteExtension extends Extension
         $container->setParameter('valiton_multi_site.base_path', $config['base_path']);
         $container->setParameter('valiton_multi_site.default_site', $config['default_site']);
         $container->setParameter('valiton_multi_site.site_class', $config['site_class']);
+
         $currentSiteService = 'valiton_multi_site.default_current_site';
         if (null !== $config['current_site_service']) {
             $currentSiteService = $config['current_site_service'];
@@ -38,6 +39,10 @@ class ValitonMultiSiteExtension extends Extension
         $siteService = $container->getDefinition('valiton_multi_site.site_service');
         $siteService->replaceArgument(2, new Reference($config['manager_registry']));
         $siteService->replaceArgument(3, $config['manager_name']);
+
+        if (null !== $config['allowed_sites_filter']) {
+            $siteService->addArgument(new Reference($config['allowed_sites_filter']));
+        }
 
         $this->loadSonataAdmin($config, $loader, $container);
         $this->loadElfinderDriver($config, $loader, $container);
