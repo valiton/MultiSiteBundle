@@ -5,11 +5,9 @@
            https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd">
 
     <document name="Valiton\Bundle\MultiSiteBundle\Document\Site" translator="attribute" referenceable="true">
-        <id name="id">
-            <generator strategy="PARENT" />
-        </id>
+        <id name="id"/>
+
         <nodename name="name" />
-        <parent-document name="parent" />
 
         <field name="domains" type="string" multivalue="true" nullable="true" />
         <field name="canonicalDomain" type="string" />

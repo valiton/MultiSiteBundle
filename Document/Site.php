@@ -22,9 +22,6 @@ class Site implements TranslatableInterface
     /** @var string */
     protected $id;
 
-    /** @var object */
-    protected $parent;
-
     /** @var string */
     protected $name;
 
@@ -113,22 +110,6 @@ class Site implements TranslatableInterface
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param object $parent
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @return object
-     */
-    public function getParent()
-    {
-        return $this->parent;
     }
 
     /**

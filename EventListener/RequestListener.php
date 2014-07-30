@@ -27,11 +27,15 @@ class RequestListener implements EventSubscriberInterface
     /** @var CurrentSite  */
     protected $currentSite;
 
-    public function __construct($defaultSiteName, SiteService $siteService, CurrentSite $currentSite)
+    /** @var array */
+    protected $excludePaths;
+
+    public function __construct($defaultSiteName, SiteService $siteService, CurrentSite $currentSite, array $excludePaths)
     {
         $this->defaultSiteName = $defaultSiteName;
         $this->siteService = $siteService;
         $this->currentSite = $currentSite;
+        $this->excludePaths = $excludePaths;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -42,6 +46,13 @@ class RequestListener implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
+
+        foreach ($this->excludePaths as $path) {
+            if (substr($request->getPathInfo(), 0, strlen($path)) == $path) {
+                return;
+            }
+        }
+
         $site = $this->siteService->findSite($request->getHost());
 
         if (null === $site) {

@@ -75,12 +75,12 @@ class SiteAdmin extends Admin
         if (null === $this->activeTheme) {
             $object->setTheme('default');
         }
-        $object->setParent($this->getModelManager()->find(null, $this->root));
         return $object;
     }
 
     public function prePersist($object)
     {
+        $object->setId($this->root.'/'.$object->getName());
         $this->upload($object);
     }
 
