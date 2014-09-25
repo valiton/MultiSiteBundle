@@ -42,13 +42,13 @@ class MultiSiteRoute extends Route
     }
 
     /**
-     * The host is already determined by the site, so ignore the setting in the route
+     * The host is needed to generate absolute urls ...
      *
      * @return string
      */
     public function getHost()
     {
-        return '';
+        return $this->getSite()->getCanonicalDomain();
     }
 
 }
