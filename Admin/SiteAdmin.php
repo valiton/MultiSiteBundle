@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Valiton\Bundle\MultiSiteBundle\Document\Site;
+use Valiton\Bundle\MultiSiteBundle\Form\Loader\MediaLoader;
 
 class SiteAdmin extends Admin
 {
@@ -18,6 +19,11 @@ class SiteAdmin extends Admin
 
     /** @var  \Liip\ThemeBundle\ActiveTheme */
     protected $activeTheme;
+
+    /**
+     * @var MediaLoader
+     */
+    protected $mediaLoader;
 
     protected function configureFormFields(FormMapper $form)
     {
@@ -32,7 +38,7 @@ class SiteAdmin extends Admin
             ->add('metaKeywords')
             ->add('canonicalDomain')
             ->add('domains', 'collection', array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
-            ->add('favicon', null, array('required' => false))
+            ->add('favicon', null, array('required' => false, 'loader' => $this->mediaLoader))
             ->add('faviconFile', 'file', array('required' => false))
         ;
     }
@@ -114,5 +120,14 @@ class SiteAdmin extends Admin
                 $file->setFileContentFromFilesystem($uploadFile->getRealPath());
             }
         }
+    }
+
+
+    /**
+     * @param MediaLoader $mediaLoader
+     */
+    public function setMediaLoader($mediaLoader)
+    {
+        $this->mediaLoader = $mediaLoader;
     }
 }
