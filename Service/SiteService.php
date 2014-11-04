@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\PHPCR\DocumentManager;
+use Valiton\Bundle\MultiSiteBundle\Document\Site;
 use Valiton\Bundle\MultiSiteBundle\Security\AllowedSitesFilter;
 
 class SiteService implements SiteServiceInterface
@@ -98,4 +99,8 @@ class SiteService implements SiteServiceInterface
         return $sites;
     }
 
+    public function reload(Site $site, $locale)
+    {
+        $this->documentManager->getUnitOfWork()->doLoadTranslation($site, $this->documentManager->getClassMetadata(ClassUtils::getClass($site)), $locale, true);
+    }
 }

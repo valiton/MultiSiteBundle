@@ -6,6 +6,8 @@
  */
 namespace Valiton\Bundle\MultiSiteBundle\Service;
 
+use Valiton\Bundle\MultiSiteBundle\Document\Site;
+
 interface SiteServiceInterface
 {
     public function findSite($domain);
@@ -15,4 +17,6 @@ interface SiteServiceInterface
     public function findSiteByChild($child);
 
     public function getSites();
+
+    public function reload(Site $site, $locale);
 }

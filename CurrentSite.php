@@ -141,4 +141,5 @@ class CurrentSite
     {
         return $this->site;
     }
+
 }
