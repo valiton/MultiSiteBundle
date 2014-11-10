@@ -40,7 +40,7 @@ class MediaLoader implements EntityLoaderInterface
         $mediaRoot = $this->currentSite->getSite()->getMediaRoot();
 
         $result = array();
-        if (isset($mediaRoot)) {
+        if (isset($mediaRoot) && null !== $mediaRoot->getChildren()) {
             foreach ($mediaRoot->getChildren() as $child) {
                 $result[$child->getId()] = $child;
             }
