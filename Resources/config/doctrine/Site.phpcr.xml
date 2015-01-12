@@ -19,6 +19,7 @@
         <field name="metaTitle" type="string" translated="true" />
         <field name="metaDescription" type="string" translated="true" />
         <field name="metaKeywords" type="string" translated="true" nullable="true" />
+        <field name="robotsTxt" type="string" nullable="true" />
 
         <reference-one name="favicon" target-document="Doctrine\ODM\PHPCR\Document\File">
             <cascade>

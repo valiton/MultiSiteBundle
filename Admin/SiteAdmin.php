@@ -36,6 +36,7 @@ class SiteAdmin extends Admin
             ->add('metaTitle')
             ->add('metaDescription')
             ->add('metaKeywords')
+            ->add('robotsTxt', 'textarea', array('required' => false))
             ->add('canonicalDomain')
             ->add('domains', 'collection', array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
             ->add('favicon', null, array('required' => false, 'loader' => $this->mediaLoader))

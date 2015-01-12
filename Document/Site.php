@@ -46,6 +46,9 @@ class Site implements TranslatableInterface
     /** @var string */
     protected $metaKeywords;
 
+    /** @var string */
+    protected $robotsTxt;
+
     /** @var File */
     protected $favicon;
 
@@ -158,6 +161,22 @@ class Site implements TranslatableInterface
     public function getMetaKeywords()
     {
         return $this->metaKeywords;
+    }
+
+    /**
+     * @param string $robotsTxt
+     */
+    public function setRobotsTxt($robotsTxt)
+    {
+        $this->robotsTxt = $robotsTxt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRobotsTxt()
+    {
+        return $this->robotsTxt;
     }
 
     /**

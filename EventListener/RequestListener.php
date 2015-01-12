@@ -9,6 +9,7 @@ namespace Valiton\Bundle\MultiSiteBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernel;
@@ -66,6 +67,14 @@ class RequestListener implements EventSubscriberInterface
         if ($request->isMethodSafe() && null !== $site->getCanonicalDomain() && $request->getHost() != $site->getCanonicalDomain()) {
             $response = new RedirectResponse(str_replace($request->getHost(), $site->getCanonicalDomain(), $request->getUri()), 301);
             $event->setResponse($response);
+
+            return;
+        }
+
+        if ($request->getPathInfo() == '/robots.txt') {
+            $event->setResponse(new Response($site->getRobotsTxt() ?: 'User-agent: *'));
+
+            return;
         }
 
         $this->currentSite->setSite($site);

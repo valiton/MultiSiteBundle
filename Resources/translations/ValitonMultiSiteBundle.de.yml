@@ -17,6 +17,7 @@ form:
     label_theme: Template-Satz
     label_meta_description: Beschreibung
     label_meta_keywords: Keywords
+    label_robots_txt: 'robots.txt'
     label_canonical_domain: Hauptdomain
     label_domains: 'Weitere Domains'
     label_favicon: 'Browser-Icon'
