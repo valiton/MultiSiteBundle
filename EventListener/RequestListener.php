@@ -72,8 +72,7 @@ class RequestListener implements EventSubscriberInterface
         }
 
         if ($request->getPathInfo() == '/robots.txt') {
-            $event->setResponse(new Response($site->getRobotsTxt() ?: 'User-agent: *'));
-
+            $event->setResponse(new Response($site->getRobotsTxt() ?: 'User-agent: *', 200, array('Content-Type' => 'text/plain')));
             return;
         }
 
