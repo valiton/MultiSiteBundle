@@ -114,11 +114,11 @@ class SiteAdmin extends Admin
                 $file->setNodename($uploadFile->getClientOriginalName());
                 $file->setParent($site->getMediaRoot());
                 $file->setFileContentFromFilesystem($uploadFile->getRealPath());
-                $this->modelManager->create($file);
                 $site->setFavicon($file);
             }
             else {
                 $file->setFileContentFromFilesystem($uploadFile->getRealPath());
+                $site->setFavicon($file);
             }
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Valiton\Bundle\MultiSiteBundle\Form\Loader;
 
+use Doctrine\ODM\PHPCR\Document\File;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Bridge\Doctrine\Form\ChoiceList\EntityLoaderInterface;
 use Valiton\Bundle\MultiSiteBundle\CurrentSite;
@@ -42,7 +43,10 @@ class MediaLoader implements EntityLoaderInterface
         $result = array();
         if (isset($mediaRoot) && null !== $mediaRoot->getChildren()) {
             foreach ($mediaRoot->getChildren() as $child) {
-                $result[$child->getId()] = $child;
+                /** @var File $child */
+                if ($child instanceof File && in_array($child->getContent()->getMimeType(), array('image/vnd.microsoft.icon', 'image/x-ico', 'image/x-icon'))) {
+                    $result[$child->getId()] = $child;
+                }
             }
         }
         return $result;

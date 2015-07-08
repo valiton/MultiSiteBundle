@@ -10,6 +10,7 @@ use Doctrine\ODM\PHPCR\Document\File;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Site
@@ -52,7 +53,11 @@ class Site implements TranslatableInterface
     /** @var File */
     protected $favicon;
 
-    /** @var UploadedFile */
+    /**
+     * @var UploadedFile
+     *
+     * @Assert\File(mimeTypes={"image/vnd.microsoft.icon", "image/x-ico", "image/x-icon"})
+     */
     protected $faviconFile;
 
     /** @var Generic */
