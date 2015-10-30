@@ -15,6 +15,7 @@
         <parameter key="valiton_multi_site.site_name_type.class">Valiton\Bundle\MultiSiteBundle\Form\SiteNameType</parameter>
         <parameter key="valiton_multi_site.site_type.class">Valiton\Bundle\MultiSiteBundle\Form\SiteType</parameter>
         <parameter key="valiton_multi_site.site_media_loader.class">Valiton\Bundle\MultiSiteBundle\Form\Loader\MediaLoader</parameter>
+        <parameter key="valiton_multi_site.favicon_controller.class">Valiton\Bundle\MultiSiteBundle\Controller\FaviconController</parameter>
     </parameters>
 
     <services>
@@ -87,6 +88,10 @@
         <service id="valiton_multi_site.site_media_loader" class="%valiton_multi_site.site_media_loader.class%">
             <argument type="service" id="valiton_multi_site.current_site" />
             <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+        </service>
+
+        <service id="valiton_multi_site.favicon_controller" class="%valiton_multi_site.favicon_controller.class%">
+            <argument type="service" id="valiton_multi_site.current_site" />
         </service>
 
     </services>
