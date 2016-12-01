@@ -10,6 +10,7 @@ use Doctrine\ODM\PHPCR\Document\File;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
+use Valiton\Bundle\MultiSiteBundle\CurrentSite;
 use Valiton\Bundle\MultiSiteBundle\Document\Site;
 use Valiton\Bundle\MultiSiteBundle\Form\Loader\MediaLoader;
 
@@ -20,10 +21,11 @@ class SiteAdmin extends Admin
     /** @var  \Liip\ThemeBundle\ActiveTheme */
     protected $activeTheme;
 
-    /**
-     * @var MediaLoader
-     */
+    /** @var MediaLoader */
     protected $mediaLoader;
+
+    /** @var CurrentSite */
+    protected $currentSite;
 
     protected function configureFormFields(FormMapper $form)
     {
@@ -39,9 +41,13 @@ class SiteAdmin extends Admin
             ->add('robotsTxt', 'textarea', array('required' => false))
             ->add('canonicalDomain')
             ->add('domains', 'collection', array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
-            ->add('favicon', null, array('required' => false, 'loader' => $this->mediaLoader))
-            ->add('faviconFile', 'file', array('required' => false))
         ;
+
+        if ($this->currentSite->getSite()->getId() == $this->getSubject()->getId()) {
+            $form->add('favicon', null, array('required' => false, 'loader' => $this->mediaLoader));
+        }
+
+        $form->add('faviconFile', 'file', array('required' => false));
     }
 
     protected function configureListFields(ListMapper $list)
@@ -123,7 +129,6 @@ class SiteAdmin extends Admin
         }
     }
 
-
     /**
      * @param MediaLoader $mediaLoader
      */
@@ -131,4 +136,13 @@ class SiteAdmin extends Admin
     {
         $this->mediaLoader = $mediaLoader;
     }
+
+    /**
+     * @param CurrentSite $currentSite
+     */
+    public function setCurrentSite($currentSite)
+    {
+        $this->currentSite = $currentSite;
+    }
+
 }

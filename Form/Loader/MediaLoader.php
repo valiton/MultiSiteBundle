@@ -41,12 +41,25 @@ class MediaLoader implements EntityLoaderInterface
         $mediaRoot = $this->currentSite->getSite()->getMediaRoot();
 
         $result = array();
-        if (isset($mediaRoot) && null !== $mediaRoot->getChildren()) {
-            foreach ($mediaRoot->getChildren() as $child) {
-                /** @var File $child */
-                if ($child instanceof File && in_array($child->getContent()->getMimeType(), array('image/vnd.microsoft.icon', 'image/x-ico', 'image/x-icon'))) {
-                    $result[$child->getId()] = $child;
-                }
+        if (isset($mediaRoot)) {
+            $qb = $this->documentManager->createQueryBuilder();
+            $qb
+                ->fromDocument('Doctrine\ODM\PHPCR\Document\Resource', 'r')
+                ->where()
+                    ->orX()
+                        ->eq()->field('r.mimeType')->literal('image/vnd.microsoft.icon')->end()
+                        ->eq()->field('r.mimeType')->literal('image/x-ico')->end()
+                        ->eq()->field('r.mimeType')->literal('mage/x-icon')->end()
+                    ->end()
+                ->end()
+                ->andWhere()
+                    ->descendant($mediaRoot->getId(), 'r')
+                ->end()
+            ;
+            $resources = $qb->getQuery()->execute();
+            foreach ($resources as $resource) {
+                $file = $resource->getParent();
+                $result[$file->getId()] = $file;
             }
         }
         return $result;
