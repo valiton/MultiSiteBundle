@@ -7,6 +7,7 @@
 namespace Valiton\Bundle\MultiSiteBundle;
 
 
+use Symfony\Cmf\Component\Routing\Candidates\CandidatesInterface;
 use Valiton\Bundle\MultiSiteBundle\Document\Site;
 
 class CurrentSite
@@ -20,8 +21,8 @@ class CurrentSite
     /** @var \Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider */
     protected $menuProvider;
 
-    /** @var \Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider */
-    protected $routeProvider;
+    /** @var  CandidatesInterface */
+    protected $routeCandidatesProvider;
 
     /** @var \Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\MediaManager  */
     protected $mediaManager;
@@ -55,11 +56,11 @@ class CurrentSite
     }
 
     /**
-     * @param \Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RouteProvider
+     * @param CandidatesInterface $routeCandidatesProvider
      */
-    public function setRouteProvider($routeProvider)
+    public function setRouteCandidatesProvider($routeCandidatesProvider)
     {
-        $this->routeProvider = $routeProvider;
+        $this->routeCandidatesProvider = $routeCandidatesProvider;
     }
 
     /**
@@ -114,8 +115,8 @@ class CurrentSite
         if (null !== $this->menuProvider) {
             $this->menuProvider->setMenuRoot($site->getMenuRoot()->getId());
         }
-        if (null !== $this->routeProvider) {
-            $this->routeProvider->setPrefix($site->getRoutesRoot()->getId());
+        if (null !== $this->routeCandidatesProvider) {
+            $this->routeCandidatesProvider->setPrefixes(array($site->getRoutesRoot()->getId()));
         }
         if (null !== $this->mediaManager) {
             $this->mediaManager->setRootPath($site->getMediaRoot()->getId());

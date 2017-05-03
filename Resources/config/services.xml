@@ -27,8 +27,8 @@
             <call method="setMenuProvider" >
                 <argument type="service" id="cmf_menu.provider" on-invalid="null" />
             </call>
-            <call method="setRouteProvider" >
-                <argument type="service" id="cmf_routing.route_provider" on-invalid="null" />
+            <call method="setRouteCandidatesProvider" >
+                <argument type="service" id="cmf_routing.phpcr_candidates_prefix" on-invalid="null" />
             </call>
             <call method="setMediaManager">
                 <argument type="service" id="cmf_media.persistence.phpcr.manager" on-invalid="null" />
