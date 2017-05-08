@@ -64,7 +64,7 @@ class SiteService implements SiteServiceInterface
         $qb = $this->documentManager->createQueryBuilder();
 
         $qb
-            ->from()
+            ->from('site')
                 ->joinInner()
                     ->left()->document(ClassUtils::getClass($child), 'child')->end()
                     ->right()->document($this->siteClass, 'site')->end()
