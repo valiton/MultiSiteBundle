@@ -49,7 +49,7 @@ class MediaLoader implements EntityLoaderInterface
                     ->orX()
                         ->eq()->field('r.mimeType')->literal('image/vnd.microsoft.icon')->end()
                         ->eq()->field('r.mimeType')->literal('image/x-ico')->end()
-                        ->eq()->field('r.mimeType')->literal('mage/x-icon')->end()
+                        ->eq()->field('r.mimeType')->literal('image/x-icon')->end()
                     ->end()
                 ->end()
                 ->andWhere()
