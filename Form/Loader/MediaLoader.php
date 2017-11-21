@@ -78,6 +78,9 @@ class MediaLoader implements EntityLoaderInterface
      */
     public function getEntitiesByIds($identifier, array $values)
     {
-        return $this->documentManager->findMany(null, $values);
+        $ids = array_filter($values, function ($id) {
+            return strlen($id) > 0;
+        });
+        return $this->documentManager->findMany(null, $ids);
     }
 }
