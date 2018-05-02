@@ -66,6 +66,14 @@ class SiteHelper
         return null;
     }
 
+    public function getName()
+    {
+        if (null !== $site = $this->currentSite->getSite()) {
+            return $site->getName();
+        }
+        return null;
+    }
+
     public function getId()
     {
         if (null !== $site = $this->currentSite->getSite()) {
