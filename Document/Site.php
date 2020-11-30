@@ -233,7 +233,7 @@ class Site implements TranslatableInterface
     }
 
     /**
-     * @param \Doctrine\ODM\PHPCR\Document\File $favicon
+     * @param File $favicon
      */
     public function setFavicon($favicon)
     {
@@ -241,7 +241,7 @@ class Site implements TranslatableInterface
     }
 
     /**
-     * @return \Doctrine\ODM\PHPCR\Document\File
+     * @return File
      */
     public function getFavicon()
     {
@@ -249,7 +249,7 @@ class Site implements TranslatableInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $faviconFile
+     * @param UploadedFile $faviconFile
      */
     public function setFaviconFile($faviconFile)
     {
@@ -257,7 +257,7 @@ class Site implements TranslatableInterface
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+     * @return UploadedFile
      */
     public function getFaviconFile()
     {
@@ -276,7 +276,7 @@ class Site implements TranslatableInterface
     {
         if (null === $this->menuRoot) {
             $this->menuRoot = new Generic();
-            $this->menuRoot->setParent($this);
+            $this->menuRoot->setParentDocument($this);
             $this->menuRoot->setNodename('menuRoot');
         }
         return $this->menuRoot;
@@ -289,7 +289,7 @@ class Site implements TranslatableInterface
     {
         if (null === $this->contentRoot) {
             $this->contentRoot = new Generic();
-            $this->contentRoot->setParent($this);
+            $this->contentRoot->setParentDocument($this);
             $this->contentRoot->setNodename('contentRoot');
         }
         return $this->contentRoot;
@@ -302,7 +302,7 @@ class Site implements TranslatableInterface
     {
         if (null === $this->routesRoot) {
             $this->routesRoot = new MultiSiteRoute();
-            $this->routesRoot->setParent($this);
+            $this->routesRoot->setParentDocument($this);
             $this->routesRoot->setName('routesRoot');
         }
         return $this->routesRoot;
@@ -317,7 +317,7 @@ class Site implements TranslatableInterface
     }
 
     /**
-     * @param \Doctrine\ODM\PHPCR\Document\Generic $mediaRoot
+     * @param Generic $mediaRoot
      */
     public function setMediaRoot($mediaRoot)
     {
@@ -325,13 +325,13 @@ class Site implements TranslatableInterface
     }
 
     /**
-     * @return \Doctrine\ODM\PHPCR\Document\Generic
+     * @return Generic
      */
     public function getMediaRoot()
     {
         if (null === $this->mediaRoot) {
             $this->mediaRoot = new Generic();
-            $this->mediaRoot->setParent($this);
+            $this->mediaRoot->setParentDocument($this);
             $this->mediaRoot->setNodename('mediaRoot');
         }
         return $this->mediaRoot;

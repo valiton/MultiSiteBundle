@@ -7,9 +7,14 @@
 namespace Valiton\Bundle\MultiSiteBundle\Admin;
 
 use Doctrine\ODM\PHPCR\Document\File;
+use Liip\ThemeBundle\ActiveTheme;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Valiton\Bundle\MultiSiteBundle\CurrentSite;
 use Valiton\Bundle\MultiSiteBundle\Document\Site;
 use Valiton\Bundle\MultiSiteBundle\Form\Loader\MediaLoader;
@@ -18,7 +23,7 @@ class SiteAdmin extends Admin
 {
     protected $root;
 
-    /** @var  \Liip\ThemeBundle\ActiveTheme */
+    /** @var  ActiveTheme */
     protected $activeTheme;
 
     /** @var MediaLoader */
@@ -32,22 +37,22 @@ class SiteAdmin extends Admin
         $form->with('form.group_general');
         $form->add('name');
         if (null !== $this->activeTheme) {
-            $form->add('theme', 'choice', array('choices' => $this->getThemes()));
+            $form->add('theme', ChoiceType::class, array('choices' => $this->getThemes()));
         }
         $form
             ->add('metaTitle')
             ->add('metaDescription')
             ->add('metaKeywords')
-            ->add('robotsTxt', 'textarea', array('required' => false))
+            ->add('robotsTxt', TextareaType::class, array('required' => false))
             ->add('canonicalDomain')
-            ->add('domains', 'collection', array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
+            ->add('domains', CollectionType::class, array('allow_add' => true, 'allow_delete' => true, 'options' => array('label' => false)))
         ;
 
         if ($this->currentSite->getSite()->getId() == $this->getSubject()->getId()) {
             $form->add('favicon', null, array('required' => false, 'loader' => $this->mediaLoader));
         }
 
-        $form->add('faviconFile', 'file', array('required' => false));
+        $form->add('faviconFile', FileType::class, array('required' => false));
     }
 
     protected function configureListFields(ListMapper $list)
@@ -118,7 +123,7 @@ class SiteAdmin extends Admin
             if (null == $file) {
                 $file = new File();
                 $file->setNodename($uploadFile->getClientOriginalName());
-                $file->setParent($site->getMediaRoot());
+                $file->setParentDocument($site->getMediaRoot());
                 $file->setFileContentFromFilesystem($uploadFile->getRealPath());
                 $site->setFavicon($file);
             }

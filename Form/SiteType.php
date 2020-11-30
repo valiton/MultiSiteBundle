@@ -10,7 +10,8 @@ namespace Valiton\Bundle\MultiSiteBundle\Form;
 
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Valiton\Bundle\MultiSiteBundle\Service\SiteServiceInterface;
 
 class SiteType extends AbstractType
@@ -18,7 +19,7 @@ class SiteType extends AbstractType
     /** @var SiteServiceInterface */
     protected $siteService;
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
            'mapped' => false,
@@ -28,17 +29,7 @@ class SiteType extends AbstractType
 
     public function getParent()
     {
-        return 'choice';
-    }
-
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return 'site';
+        return ChoiceType::class;
     }
 
     protected function getSites()
@@ -58,6 +49,5 @@ class SiteType extends AbstractType
     {
         $this->siteService = $siteService;
     }
-
 
 }

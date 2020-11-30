@@ -10,9 +10,10 @@ namespace Valiton\Bundle\MultiSiteBundle\Form;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Valiton\Bundle\MultiSiteBundle\Service\SiteServiceInterface;
 
 class SiteNameType extends AbstractType
@@ -29,7 +30,7 @@ class SiteNameType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'virtual' => true,
@@ -37,26 +38,17 @@ class SiteNameType extends AbstractType
         ));
     }
 
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return 'site_name';
-    }
-
     public function getParent()
     {
-        return 'text';
+        return TextType::class;
     }
 
     /**
-     * @param \Valiton\Bundle\MultiSiteBundle\Service\SiteServiceInterface $siteService
+     * @param SiteServiceInterface $siteService
      */
     public function setSiteService($siteService)
     {
         $this->siteService = $siteService;
     }
+
 }

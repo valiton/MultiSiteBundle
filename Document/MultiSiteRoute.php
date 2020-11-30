@@ -34,7 +34,7 @@ class MultiSiteRoute extends Route
         if (false === $this->site) {
             $node = $this;
             while ($node && !$node instanceof Site) {
-                $node = $node->getParent();
+                $node = $node->getParentDocument();
             }
             $this->site = $node;
         }
