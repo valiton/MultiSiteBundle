@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="valiton_multi_site_favicon" pattern="/favicon.ico">
+    <route id="valiton_multi_site_favicon" path="/favicon.ico">
         <default key="_controller">valiton_multi_site.favicon_controller:favicon</default>
     </route>
 
