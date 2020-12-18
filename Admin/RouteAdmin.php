@@ -9,7 +9,7 @@
 namespace Valiton\Bundle\MultiSiteBundle\Admin;
 
 
-use Symfony\Cmf\Bundle\RoutingBundle\Admin\RouteAdmin as BaseRouteAdmin;
+use Symfony\Cmf\Bundle\SonataPhpcrAdminIntegrationBundle\Admin\Routing\RouteAdmin as BaseRouteAdmin;
 
 
 class RouteAdmin extends BaseRouteAdmin
