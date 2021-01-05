@@ -33,7 +33,7 @@ class SiteNameType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'virtual' => true,
+            'inherit_data' => true,
             'disabled' => true
         ));
     }
