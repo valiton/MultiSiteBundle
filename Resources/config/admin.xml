@@ -26,6 +26,14 @@
             <call method="setTranslationDomain">
                 <argument>ValitonMultiSiteBundle</argument>
             </call>
+
+            <call method="setManagerRegistry">
+                <argument type="service" id="doctrine_phpcr"></argument>
+            </call>
+
+            <call method="setRootPath">
+                <argument>%valiton_multi_site.base_path%</argument>
+            </call>
         </service>
 
         <service id="valiton_multi_site.site_admin" class="%valiton_multi_site.site_admin.class%">
