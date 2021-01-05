@@ -30,7 +30,8 @@ class ValitonMultiSiteExtension extends Extension
         $container->setParameter('valiton_multi_site.default_site', $config['default_site']);
         $container->setParameter('valiton_multi_site.site_class', $config['site_class']);
         $container->setParameter('valiton_multi_site.exclude_paths', $config['exclude_paths']);
-
+        $container->setParameter('valiton_multi_site.form_group', $config['form_group']);
+        $container->setParameter('valiton_multi_site.form_tab', $config['form_tab']);
 
         $currentSiteService = 'valiton_multi_site.default_current_site';
         if (null !== $config['current_site_service']) {

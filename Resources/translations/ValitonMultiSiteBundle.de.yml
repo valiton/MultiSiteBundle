@@ -1,28 +1,31 @@
 dashboard:
-    group_admin: Administration
-    label_site: Websites
+    group_admin: 'Administration'
+    label_site: 'Websites'
 
 
 breadcrumb:
-    link_site_list: Websites
+    link_site_list: 'Websites'
 
 list:
-    label_name: Name
-    label_canonical_domain: Domain
-    label_meta_title: Titel
+    label_name: 'Name'
+    label_canonical_domain: 'Domain'
+    label_meta_title: 'Titel'
 
 form:
-    label_name: Name
-    label_meta_title: Titel
-    label_theme: Template-Satz
-    label_meta_description: Beschreibung
-    label_meta_keywords: Keywords
+    label_name: 'Name'
+    label_meta_title: 'Titel'
+    label_theme: 'Template-Satz'
+    label_meta_description: 'Beschreibung'
+    label_meta_keywords: 'Keywords'
     label_robots_txt: 'robots.txt'
-    label_canonical_domain: Hauptdomain
+    label_canonical_domain: 'Hauptdomain'
     label_domains: 'Weitere Domains'
     label_favicon: 'Browser-Icon'
     label_favicon_file: 'Browser-Icon hochladen'
+    label_site: 'Site'
 
     group_general: 'Allgemein'
+    group_multi_site: 'Multi-Site'
+    tab_multi_site: 'Multi-Site'
 
 new_site: 'Neue Site'
