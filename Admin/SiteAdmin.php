@@ -53,6 +53,7 @@ class SiteAdmin extends Admin
         }
 
         $form->add('faviconFile', FileType::class, array('required' => false));
+        $form->end();
     }
 
     protected function configureListFields(ListMapper $list)

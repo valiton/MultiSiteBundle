@@ -18,14 +18,47 @@ class MultiSiteExtension extends AdminExtension
      */
     protected $siteService;
 
+    /**
+     * @var string
+     */
+    protected $formGroup;
+
+    /**
+     * @var string
+     */
+    protected $formTab;
+
+    public function __construct($formGroup = 'form.group_multi_site', $formTab = 'form.tab_multi_site')
+    {
+        $this->formGroup = $formGroup;
+        $this->formTab = $formTab;
+    }
+
     public function configureListFields(ListMapper $list)
     {
         $list->add(new SiteFieldDescription($this->siteService));
     }
 
-    public function configureFormFields(FormMapper $form)
+    public function configureFormFields(FormMapper $formMapper)
     {
-        $form->add('site', SiteNameType::class);
+        if ($formMapper->hasOpenTab()) {
+            $formMapper->end();
+        }
+
+        $formMapper
+            ->tab($this->formTab, 'form.tab_multi_site' === $this->formTab
+                ? ['translation_domain' => 'ValitonMultiSiteBundle']
+                : []
+            )
+                ->with($this->formGroup, 'form.group_multi_site' === $this->formGroup
+                    ? ['translation_domain' => 'ValitonMultiSiteBundle']
+                    : []
+                )
+                    ->add('site', SiteNameType::class)
+                ->end()
+            ->end()
+        ;
+
     }
 
     /**

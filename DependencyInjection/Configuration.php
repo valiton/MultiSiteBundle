@@ -30,6 +30,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('current_site_service')->defaultNull()->end()
                 ->scalarNode('default_site')->defaultValue('main')->end()
                 ->scalarNode('allowed_sites_filter')->defaultNull()->end()
+                ->scalarNode('form_group')->defaultValue('form.group_multi_site')->end()
+                ->scalarNode('form_tab')->defaultValue('form.tab_multi_site')->end()
                 ->arrayNode('exclude_paths')
                     ->prototype('scalar')->end()
                 ->end()
