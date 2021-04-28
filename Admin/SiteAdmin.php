@@ -49,7 +49,7 @@ class SiteAdmin extends Admin
         ;
 
         if ($this->currentSite->getSite()->getId() == $this->getSubject()->getId()) {
-            $form->add('favicon', null, array('required' => false, 'loader' => $this->mediaLoader));
+            $form->add('favicon', null, array('required' => false, 'choices' => $this->mediaLoader->getEntities()));
         }
 
         $form->add('faviconFile', FileType::class, array('required' => false));
