@@ -4,14 +4,14 @@
 namespace Valiton\Bundle\MultiSiteBundle\Admin\Extension;
 
 
-use Sonata\AdminBundle\Admin\AdminExtension;
+use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Valiton\Bundle\MultiSiteBundle\Admin\SiteFieldDescription;
 use Valiton\Bundle\MultiSiteBundle\Form\SiteNameType;
 use Valiton\Bundle\MultiSiteBundle\Service\SiteServiceInterface;
 
-class MultiSiteExtension extends AdminExtension
+class MultiSiteExtension extends AbstractAdminExtension
 {
     /**
      * @var SiteServiceInterface
