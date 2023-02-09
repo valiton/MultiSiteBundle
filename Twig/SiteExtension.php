@@ -21,7 +21,7 @@ class SiteExtension extends AbstractExtension implements GlobalsInterface
         $this->siteHelper = $siteHelper;
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return array('site' => $this->siteHelper);
     }

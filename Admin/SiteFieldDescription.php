@@ -9,7 +9,6 @@
 namespace Valiton\Bundle\MultiSiteBundle\Admin;
 
 
-use Sonata\AdminBundle\Exception\NoValueException;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\FieldDescription;
 use Valiton\Bundle\MultiSiteBundle\Service\SiteServiceInterface;
 

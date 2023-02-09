@@ -2,7 +2,6 @@
 
 namespace Valiton\Bundle\MultiSiteBundle\Form\Loader;
 
-use Doctrine\ODM\PHPCR\Document\File;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Bridge\Doctrine\Form\ChoiceList\EntityLoaderInterface;
 use Valiton\Bundle\MultiSiteBundle\CurrentSite;

@@ -7,7 +7,6 @@
 namespace Valiton\Bundle\MultiSiteBundle\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Valiton\Bundle\MultiSiteBundle\Document\Site;

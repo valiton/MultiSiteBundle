@@ -9,8 +9,6 @@
 namespace Valiton\Bundle\MultiSiteBundle\Security;
 
 
-use Doctrine\Common\Collections\Collection;
-
 interface AllowedSitesFilter
 {
 
